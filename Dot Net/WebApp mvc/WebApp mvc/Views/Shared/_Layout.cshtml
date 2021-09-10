@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/Main.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <a asp-controller="home" asp-action="index" class="btn btn-primary">All Employee</a>
+        <a asp-controller="home" asp-action="details" class="btn btn-primary">Details Employee</a>
+        <a asp-controller="home" asp-action="create" class="btn btn-primary">Creaete</a>
+        @* kolchi l views kaydar liha render hna *@
+        @RenderBody()
+    </div>
+    <script src="~/js/Main.js"></script>
+    @if (IsSectionDefined("Scripts"))
+    {
+        // b section kat9der t7adad resource l view mo7adada css js ...
+        @RenderSection("Scripts", required: true);
+    }
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "";
+}
+
+@* transfer data using viewdata *@
+<h1>@ViewData["PageTitle"]</h1>
+@{
+    var employee = @ViewData["Employee"] as WebApp_mvc.Moddels.Employee;
+}
+<p>
+    name : @employee.Name
+</p>
+<p>
+    email : @employee.Email
+</p>
+<p>
+    department : @employee.Department
+</p>

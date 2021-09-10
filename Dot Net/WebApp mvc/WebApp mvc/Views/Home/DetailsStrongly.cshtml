@@ -1,0 +1,21 @@
+﻿@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    //l
+    ViewBag.Title = "";
+}
+
+
+@* darori t3ayat 3la l model bach t9der tchof l prop lta7t wykon 3and strongly tayped data *@
+@* haka kadir strongly typed html *@
+@model WebApp_mvc.Moddels.Employee
+@* transfer data using model *@
+<h1>@ViewBag.PageTitle</h1>
+<p>
+    name : @Model.Name
+</p>
+<p>
+    email : @Model.Email
+</p>
+<p>
+    department : @Model.Department
+</p>

@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<Employee>
+
+@{ 
+    // haka katgol l view bli khas ydar liha render
+    // f hadak layout
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    //wmn la7san tkhdem b viewstart bach bla matb9a kola mara t7adad f kolo view lyout
+
+    //haka kat7adad title dyal page
+    ViewBag.Title = "All Employee";
+}
+<div class="card-deck">
+    @foreach (var employee in Model)
+    {
+    <div class="card m-3">
+        <div class="card-header">
+            <h3>@employee.Name</h3>
+        </div>
+        @*
+            had l image tag helper asp-append-version="true"
+            kaykhalik yla kan chi taghyir fl media kayghayro fl browser
+            yla makan 7ta taghyir kaykhod l media li fl cache
+            using hash value bach kay3raf wach tra taghyir chof page source
+            v=.....
+            <img class="card-img-top" src="/images/employee.jpg?v=Ji2NcLUWUD9q1x1EImaVWkaeHLEf2BDRzaLyzYmhrGY" />
+        *@
+        <img class="card-img-top" asp-append-version="true" src="~/images/employee.jpg" />
+
+        <div class="card-footer text-center">
+            @*<a href="/home/details/@employee.Id" class="btn btn-primary">View</a>*@
+            @*@Html.ActionLink("name of de link","action method","controller",new { paramName = value })*@
+            @*<a class="btn btn-primary" href="@Url.Action("details","home",new{ id = employee.Id})">Veiw</a>*@
+            @*@Html.ActionLink("View", "details", "home", new { id = employee.Id })*@
+
+            <a asp-controller="home" asp-action="details" asp-route-id="@employee.Id" class="btn btn-primary">View</a>
+            <a href="#" class="btn btn-primary">Edit</a>
+            <a asp-controller="home" asp-action="delete" asp-route-id="@employee.Id" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    }
+</div>

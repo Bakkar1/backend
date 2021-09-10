@@ -1,0 +1,29 @@
+﻿@model Employee
+@{
+    ViewBag.Title = "Create Employee";
+}
+@*validation kadirha b Required 9bal l propertie fl class Employee*@
+@* validation kadar fl class Employee *@
+<form asp-controller="home" asp-action="Create" method="post">
+    <div>
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" />
+        @* yla kan ay error fl validation dyal name ghaydar lhad span display btext dyal error message *@
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Department">Department</label>
+        <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()">
+            <option value="">Please Select</option>
+        </select>
+        <span asp-validation-for="Department" class="text-danger"></span>
+    </div>
+    @* ay error tra ghaydar lih display hna *@
+    @*<div asp-validation-summary="All" class="text-danger"></div>*@
+    <input type="submit" value="Create" />
+</form>

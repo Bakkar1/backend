@@ -1,0 +1,39 @@
+to work with migrations in PM :
+I cant use Add-Migration before installed "Microsoft.EntityFrameworkCore.Tools"
+in PM console: Install-Package  Microsoft.EntityFrameworkCore.Tools
+
+::======
+the default name of primary key in the Entity type (in this case employee)
+must be Id other ways entity framework will not recognize the primary key
+(or search how can you change de default name !)
+::================
+
+Entity framework core migrations :
+to create a database based on the types( in our case employee class)
+
+open package manager console from : view/other windows/pmc
+
+1 : command : Add-Migration
+
+2 : gev a name to de migration
+
+// a folder with name migration wil be created , see solution explorer
+
+3 : command to execute and create db : Update-database
+
+=========================
+// to update database : commands
+
+1: Add-Migration chosingName
+2: update-database
+
+
+=================================
+bach tarja3 l7ala dyal database fchi migration 9dima
+kadir
+f tables chof table li katdiro entity framework li smito : __EFMigrationsHistory
+ghatl9a fih ga3 l migration li dar lihom aplly 3la database
+
+kadir had command
+
+update-database migrationName
