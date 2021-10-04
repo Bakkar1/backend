@@ -1,0 +1,59 @@
+﻿@model EmployeeCreateMultipleFiles;
+@{
+    ViewBag.Title = "Create Employee";
+}
+@*validation kadirha b Required 9bal l propertie fl class Employee*@
+@* validation kadar fl class Employee *@
+@* to support upload files use enctype="multipart/form-data" *@
+<form enctype="multipart/form-data" asp-controller="home" asp-action="CreateMultiple" method="post">
+    <div>
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" />
+        @* yla kan ay error fl validation dyal name ghaydar lhad span display btext dyal error message *@
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Department">Department</label>
+        <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()">
+            <option value="">Please Select</option>
+        </select>
+        <span asp-validation-for="Department" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Photos"></label>
+        <div>
+            <div class="custom-file">
+                <!-- bach t9der dir upload l myltiple files multiple-->
+                <input multiple asp-for="Photos" class="form-control custom-file-input" />
+                <label class="custom-file-label">Choose File...</label>
+            </div>
+        </div>
+    </div>
+    @* ay error tra ghaydar lih display hna *@
+    @*<div asp-validation-summary="All" class="text-danger"></div>*@
+    <input type="submit" value="Create" />
+    @section Scripts{
+        <script>
+            //bach yban lik path dyal file f labale
+            window.addEventListener('load', function () {
+                let myInput = document.querySelector('.custom-file-input');
+                myInput.onchange = function () {
+                    console.log(this.files);
+                    let selectedItems = this.files.length;
+                    if (selectedItems == 1) {
+                        this.nextElementSibling.textContent = this.value.split('\\').pop();
+                    }
+                    else if (selectedItems > 1) {
+                        this.nextElementSibling.textContent = selectedItems + " files selected";
+                    }
+                    
+                }
+            }, false)
+        </script>
+    }
+</form>

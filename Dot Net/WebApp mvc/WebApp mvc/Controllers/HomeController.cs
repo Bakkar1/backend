@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using WebApp_mvc.Moddels;
 using WebApp_mvc.ViewModels;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApp_mvc.Controllers
 {
@@ -15,9 +17,14 @@ namespace WebApp_mvc.Controllers
         // bach te9der tekhdem b IEmployeeRepository khasak dir liha
         // registretion f StartUp class
         private readonly IEmployeeRepository _iEmployeeRepository;
-        public HomeController(IEmployeeRepository iEmployeeRepository)
+
+        public IWebHostEnvironment hostingEnvironment { get; }
+
+        public HomeController(IEmployeeRepository iEmployeeRepository,
+                                IWebHostEnvironment hostingEnvironment)
         {
             _iEmployeeRepository = iEmployeeRepository;
+            this.hostingEnvironment = hostingEnvironment;
         }
         public ViewResult Index()
         {
@@ -39,16 +46,27 @@ namespace WebApp_mvc.Controllers
 
         //viewmodel katkhdem biha fach ykon 3and model wmafihech kolchi data li bghit tsifatha
         //attribute route : [Route("Details/{id?}")]
-        public ViewResult Details(int? id)
+        public IActionResult Details(int? id)
         {
-            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            //HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            //{
+            //    Employee = _iEmployeeRepository.GetEmployee(id ?? 1)
+            //      Null - Coalescing Operator : if id is null than return 1
+            //    ,
+            //    PageTitle = "Emloyee Details"
+            //};
+
+            //return View(_iEmployeeRepository.GetEmployee(id ?? 1));
+
+            Employee model = _iEmployeeRepository.GetEmployee(id ?? 1);
+            if(model == null)
             {
-                Employee = _iEmployeeRepository.GetEmployee(id??1)
-                //  Null-Coalescing Operator : if id is null than return 1
-                ,
-                PageTitle = "Emloyee Details"
-            };
-            return View(homeDetailsViewModel);
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id);
+            }
+            
+            return View(model);
+            
         }
         public ViewResult DetailsDT()
         {
@@ -100,26 +118,136 @@ namespace WebApp_mvc.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeCreateViewModel model)
         {
             // yla kolchi validation dazt mezyan
             if (ModelState.IsValid)
             {
-                Employee newEmployee = _iEmployeeRepository.Add(employee);
-                // haka kadir i3adat tawjih l action method Details li kayna l fog 
-                // bach tchof details dyal had new employee
+                string uniqueFileName = null;
+                if(model.Photo != null)
+                {
+                    // hostingEnvironment.WebRootPath katraja3 lik absolute path dyal wwwroot folder
+                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    // haka kandiro wa7d l uniqe name l hadak l file 
+                    // maykonch 3nadna nafs lfile bjoj smiyat
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    //upload de image file to the server (images folder)
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+                Employee newEmployee = new Employee()
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Department = model.Department,
+                    PhotoPath = uniqueFileName,
+                };
+                _iEmployeeRepository.Add(newEmployee);
                 return RedirectToAction("Details", new { id = newEmployee.Id });
             }
-            
             return View();
         }
         public IActionResult Delete(int id)
         {
-            //if(_iEmployeeRepository.Delete(id))
-            //{
-            //    return View("index");
-            //}
-            return View("index");
+            _iEmployeeRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+
+        #region upload multiple files
+        [HttpGet]
+        public ViewResult CreateMultiple()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateMultiple(EmployeeCreateMultipleFiles model)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                // akhir tswira ghandiro lih upload hiya li ghatkon dyal hadak employee
+                // 7it 3nadna ghir table wa7d w uniqueFileName kola mara kandiro lih override f loop
+                string uniqueFileName = ProcessUploadedFile(model);
+                Employee newEmployee = new Employee()
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Department = model.Department,
+                    PhotoPath = uniqueFileName,
+                };
+                _iEmployeeRepository.Add(newEmployee);
+                return RedirectToAction("Details", new { id = newEmployee.Id });
+            }
+            return View();
+        }
+        #endregion
+
+        [HttpGet]
+        public ViewResult Edit (int id)
+        {
+            Employee employee = _iEmployeeRepository.GetEmployee(id);
+            EmployeeEditViewModel emplEditViewModel = new EmployeeEditViewModel()
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Email = employee.Email,
+                Department = employee.Department,
+                ExistingPhotoPath = employee.PhotoPath
+            };
+            return View(emplEditViewModel);
+        }
+        [HttpPost]
+        public IActionResult Edit(EmployeeEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Employee employee = _iEmployeeRepository.GetEmployee(model.Id);
+
+                employee.Name = model.Name;
+                employee.Email = model.Email;
+                employee.Department = model.Department;
+                employee.PhotoPath = model.ExistingPhotoPath;
+                if(model.Photos != null)
+                {
+                    if(model.ExistingPhotoPath != null)
+                    {
+                        //delete existing photo
+                        string filePath = Path.Combine(hostingEnvironment.WebRootPath, "images", model.ExistingPhotoPath);
+                        System.IO.File.Delete(filePath);
+                    }
+                    employee.PhotoPath = ProcessUploadedFile(model);
+                }
+                _iEmployeeRepository.Update(employee);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        private string ProcessUploadedFile(EmployeeCreateMultipleFiles model)
+        {
+            string uniqueFileName = null;
+            if (model.Photos != null && model.Photos.Count > 0)
+            {
+                foreach (IFormFile photo in model.Photos)
+                {
+                    // hostingEnvironment.WebRootPath katraja3 lik absolute path dyal wwwroot folder
+                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    // haka kandiro wa7d l uniqe name l hadak l file 
+                    // maykonch 3nadna nafs lfile bjoj smiyat
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    //upload de image file to the server (images folder)
+                    //photo.CopyTo(new FileStream(filePath, FileMode.Create)); not juist file stream not closed
+                    using(FileStream fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        photo.CopyTo(fs);
+                    }
+                }
+            }
+            return uniqueFileName;
         }
     }
 }

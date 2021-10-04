@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r5ZPXs+1TRJh9nB7b+AxySBtncCjTMDeoQcqrl8DvxM55qHK2ChsMmpZfTBMOOYShJvmnOOuchL4YgeCdR5Arw==",
+  "dgSpecHash": "i2Xng8Cvwtr518zcngGI0STkWeA5EaUBX1Lb/GW67Ml0PI/nootRIDjQJr9/Rm8NKira/AHGuU8IdU4suBgQTA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mbark\\OneDrive\\Documents\\ASP.NET Core\\WebApp mvc Entity\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj",
+  "projectFilePath": "C:\\Users\\mbark\\OneDrive\\Documents\\GitHub\\backend\\Dot Net\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mbark\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mbark\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

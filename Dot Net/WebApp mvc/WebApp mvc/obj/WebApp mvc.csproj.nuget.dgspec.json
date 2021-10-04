@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mbark\\OneDrive\\Documents\\ASP.NET Core\\WebApp mvc Entity\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj": {}
+    "C:\\Users\\mbark\\OneDrive\\Documents\\GitHub\\backend\\Dot Net\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mbark\\OneDrive\\Documents\\ASP.NET Core\\WebApp mvc Entity\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj": {
+    "C:\\Users\\mbark\\OneDrive\\Documents\\GitHub\\backend\\Dot Net\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mbark\\OneDrive\\Documents\\ASP.NET Core\\WebApp mvc Entity\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj",
+        "projectUniqueName": "C:\\Users\\mbark\\OneDrive\\Documents\\GitHub\\backend\\Dot Net\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj",
         "projectName": "WebApp mvc",
-        "projectPath": "C:\\Users\\mbark\\OneDrive\\Documents\\ASP.NET Core\\WebApp mvc Entity\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj",
+        "projectPath": "C:\\Users\\mbark\\OneDrive\\Documents\\GitHub\\backend\\Dot Net\\WebApp mvc\\WebApp mvc\\WebApp mvc.csproj",
         "packagesPath": "C:\\Users\\mbark\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mbark\\OneDrive\\Documents\\ASP.NET Core\\WebApp mvc Entity\\WebApp mvc\\WebApp mvc\\obj\\",
+        "outputPath": "C:\\Users\\mbark\\OneDrive\\Documents\\GitHub\\backend\\Dot Net\\WebApp mvc\\WebApp mvc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\mbark\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],

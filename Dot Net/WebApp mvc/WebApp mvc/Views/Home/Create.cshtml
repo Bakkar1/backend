@@ -1,10 +1,11 @@
-﻿@model Employee
+﻿@model EmployeeCreateViewModel;
 @{
     ViewBag.Title = "Create Employee";
 }
 @*validation kadirha b Required 9bal l propertie fl class Employee*@
 @* validation kadar fl class Employee *@
-<form asp-controller="home" asp-action="Create" method="post">
+@* to support upload files use enctype="multipart/form-data" *@
+<form enctype="multipart/form-data" asp-controller="home" asp-action="Create" method="post">
     <div>
         <label asp-for="Name">Name</label>
         <input asp-for="Name" />
@@ -23,7 +24,28 @@
         </select>
         <span asp-validation-for="Department" class="text-danger"></span>
     </div>
+    <div>
+        <label asp-for="Photo"></label>
+        <div>
+            <div class="custom-file">
+                <input multiple asp-for="Photo" class="form-control custom-file-input" />
+                <label class="custom-file-label">Choose File...</label>
+            </div>
+        </div>
+    </div>
     @* ay error tra ghaydar lih display hna *@
     @*<div asp-validation-summary="All" class="text-danger"></div>*@
     <input type="submit" value="Create" />
+    @section Scripts{
+        <script>
+            //bach yban lik path dyal file f labale
+            window.addEventListener('load', function () {
+                let myInput = document.querySelector('.custom-file-input');
+                myInput.onchange = function () {
+                    let fileName = this.value.split('\\').pop();
+                    this.nextElementSibling.textContent = fileName;
+                }
+            }, false)
+        </script>
+    }
 </form>
