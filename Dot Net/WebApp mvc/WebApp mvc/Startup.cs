@@ -64,10 +64,13 @@ namespace WebApp_mvc
 
                 //haka kan9dro nbayna wa7d lview b link liha fach ytra chi eroor
                 // {0} this placeholder autmaticly resive de no succes status code
-                app.UseStatusCodePagesWithRedirects("/Error/{0}");
+                //app.UseStatusCodePagesWithRedirects("/Error/{0}");
 
-                //wala hadi
-                //app.UseStatusCodePagesWithReExecute("/Error/{0}");
+                //wala hadi, khdem 7san bhadi
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
+                // Global exception handling 
+                app.UseExceptionHandler("/Error");
             }
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
