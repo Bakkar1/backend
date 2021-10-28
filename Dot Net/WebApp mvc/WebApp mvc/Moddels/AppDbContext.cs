@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApp_mvc.Moddels
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {
@@ -26,6 +27,10 @@ namespace WebApp_mvc.Moddels
          */
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //yla jak had l error mnin tbghi dir migration zid base.OnModelCreating(modelBuilder);
+            //The entity type 'IdentityUserLogin<string>' requires a primary key to be defined. If you intended to use a keyless entity type, call 'HasNoKey' in 'OnModelCreating'. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.
+            base.OnModelCreating(modelBuilder);
+
             //hadchi ghir khtisar l dackchi li lta7t
             ModelbuilderExtensions.Seed(modelBuilder);
 

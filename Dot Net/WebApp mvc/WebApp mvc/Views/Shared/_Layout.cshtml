@@ -8,11 +8,14 @@
     <link href="~/css/Main.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
+    <header>
         <a asp-controller="home" asp-action="index" class="btn btn-primary">All Employee</a>
         <a asp-controller="home" asp-action="details" class="btn btn-primary">Details Employee</a>
         <a asp-controller="home" asp-action="create" class="btn btn-primary">Creaete</a>
         <a asp-controller="home" asp-action="CreateMultiple" class="btn btn-primary">multiple</a>
+        <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Register</a>
+    </header>
+    <div class="container">
         @* kolchi l views kaydar liha render hna *@
         @RenderBody()
     </div>

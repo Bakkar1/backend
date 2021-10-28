@@ -28,7 +28,6 @@ namespace WebApp_mvc.Controllers
         }
         public ViewResult Index()
         {
-            throw new Exception("error in index");
             var model = _iEmployeeRepository.GetAllEmployee();
             return View(model);
         }

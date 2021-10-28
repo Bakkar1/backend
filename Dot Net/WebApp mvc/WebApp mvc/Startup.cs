@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,9 @@ namespace WebApp_mvc
             services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("EmployeeDBConnection"))
             );
+
+            services.AddIdentity <IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             //mvc services
             services.AddMvc(options => options.EnableEndpointRouting = false);
@@ -74,6 +78,8 @@ namespace WebApp_mvc
             }
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             //default routing
             //darori UseMvcWithDefaultRoute ykon ba3d UseStaticFiles
