@@ -213,3 +213,4 @@ C:\Users\mbark\OneDrive\Documents\GitHub\backend\Dot Net\WebApp mvc\WebApp mvc\o
 C:\Users\mbark\OneDrive\Documents\GitHub\backend\Dot Net\WebApp mvc\WebApp mvc\obj\Debug\netcoreapp3.1\WebApp mvc.genruntimeconfig.cache
 C:\Users\mbark\OneDrive\Documents\GitHub\backend\Dot Net\WebApp mvc\WebApp mvc\obj\Debug\netcoreapp3.1\WebApp mvc.csproj.AssemblyReference.cache
 C:\Users\mbark\OneDrive\Documents\GitHub\backend\Dot Net\WebApp mvc\WebApp mvc\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\mbark\OneDrive\Documents\GitHub\backend\Dot Net\WebApp mvc\WebApp mvc\obj\Debug\netcoreapp3.1\WebApp mvc.GeneratedMSBuildEditorConfig.editorconfig

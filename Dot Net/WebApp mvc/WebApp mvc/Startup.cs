@@ -29,6 +29,7 @@ namespace WebApp_mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
 
             services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("EmployeeDBConnection"))
@@ -38,7 +39,7 @@ namespace WebApp_mvc
                 .AddEntityFrameworkStores<AppDbContext>();
 
             //mvc services
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            //services.AddMvc(options => options.EnableEndpointRouting = false);
 
              
             // registretion hna
@@ -51,7 +52,12 @@ namespace WebApp_mvc
             //fach t3ayat 3la IEmployeeRepository kayraja3 lik instant mn MockEmployeeReository / SQLEmployeeRepository
 
 
-
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+            });
 
         }
 
@@ -79,11 +85,14 @@ namespace WebApp_mvc
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseRouting();
+
+
             app.UseAuthentication();
 
             //default routing
             //darori UseMvcWithDefaultRoute ykon ba3d UseStaticFiles
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
 
             // custom routing
             // ? optional
@@ -99,12 +108,12 @@ namespace WebApp_mvc
 
             //app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             //app.Run(async context =>
             //{

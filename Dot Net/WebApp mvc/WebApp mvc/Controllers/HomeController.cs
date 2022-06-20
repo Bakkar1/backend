@@ -58,8 +58,10 @@ namespace WebApp_mvc.Controllers
 
             //return View(_iEmployeeRepository.GetEmployee(id ?? 1));
 
+
             Employee model = _iEmployeeRepository.GetEmployee(id ?? 1);
-            if(model == null)
+
+            if (model == null)
             {
                 Response.StatusCode = 404;
                 return View("EmployeeNotFound", id);

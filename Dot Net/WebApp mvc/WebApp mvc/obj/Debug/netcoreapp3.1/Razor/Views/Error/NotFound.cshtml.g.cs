@@ -26,8 +26,15 @@ using WebApp_mvc.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 18 "C:\Users\mbark\OneDrive\Documents\GitHub\backend\Dot Net\WebApp mvc\WebApp mvc\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4f99100aee504bd19b5cda28f375ab60158ffc78", @"/Views/Error/NotFound.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"037a0dc1a7f1bc78870b24386985725f1ec0491a", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"074ebe9133e2ad1c1ffadf1e2bfec40751d393f7", @"/Views/_ViewImports.cshtml")]
     public class Views_Error_NotFound : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Home", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -90,7 +97,7 @@ using WebApp_mvc.ViewModels;
 #line hidden
 #nullable disable
             WriteLiteral(" : OriginalQueryString</h1>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4f99100aee504bd19b5cda28f375ab60158ffc785195", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4f99100aee504bd19b5cda28f375ab60158ffc785419", async() => {
                 WriteLiteral("\r\n        Click here to see the list of emloyees\r\n    ");
             }
             );

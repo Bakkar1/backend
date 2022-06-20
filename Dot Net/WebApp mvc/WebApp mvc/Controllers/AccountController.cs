@@ -51,5 +51,11 @@ namespace WebApp_mvc.Controllers
             }
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await singInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+        }
     }
 }
